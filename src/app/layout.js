@@ -1,6 +1,7 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { CartProvider } from "@/components/providers/CartProvider";
 import { getActiveTheme } from "@/lib/api/theme";
 import { themeToCss } from "@/lib/theme/tokensToCss";
 
@@ -65,7 +66,9 @@ export default async function RootLayout({ children }) {
         <style id="theme-tokens" dangerouslySetInnerHTML={{ __html: themeCss }} />
       </head>
       <body className="min-h-full flex flex-col">
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <CartProvider>{children}</CartProvider>
+        </QueryProvider>
       </body>
     </html>
   );
