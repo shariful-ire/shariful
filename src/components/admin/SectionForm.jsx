@@ -11,6 +11,13 @@ import { AboutFields } from "./sections/AboutFields";
 import { SkillsFields } from "./sections/SkillsFields";
 import { ProjectsFields } from "./sections/ProjectsFields";
 import { ContactFields } from "./sections/ContactFields";
+import { ResearchFields } from "./sections/ResearchFields";
+import { GalleryFields } from "./sections/GalleryFields";
+import { TestimonialsFields } from "./sections/TestimonialsFields";
+import { ExperienceFields } from "./sections/ExperienceFields";
+import { CertificationsFields } from "./sections/CertificationsFields";
+import { VentureFields } from "./sections/VentureFields";
+import { BlogFields } from "./sections/BlogFields";
 
 const CONTENT_FIELDS = {
   hero: HeroFields,
@@ -18,6 +25,14 @@ const CONTENT_FIELDS = {
   skills: SkillsFields,
   projects: ProjectsFields,
   contact: ContactFields,
+  research: ResearchFields,
+  gallery: GalleryFields,
+  testimonials: TestimonialsFields,
+  experience: ExperienceFields,
+  certifications: CertificationsFields,
+  startup: VentureFields,
+  business: VentureFields,
+  blog: BlogFields,
 };
 
 const DEFAULT_CONTENT = {
@@ -26,6 +41,14 @@ const DEFAULT_CONTENT = {
   skills: { heading: "Skills", items: [] },
   projects: { heading: "Projects", items: [] },
   contact: { heading: "Contact", email: "", phone: "", socials: [] },
+  research: { heading: "Research", items: [] },
+  gallery: { heading: "Gallery", items: [] },
+  testimonials: { heading: "Testimonials", items: [] },
+  experience: { heading: "Experience", items: [] },
+  certifications: { heading: "Certifications", items: [] },
+  startup: { heading: "Startups", items: [] },
+  business: { heading: "Business", items: [] },
+  blog: { heading: "Blog", postCount: 3 },
 };
 
 /** Splits "react, node, mongodb" into ["react","node","mongodb"], dropping empties. */
@@ -56,6 +79,9 @@ function normalizeContentForSubmit(type, content) {
         level: item.level === "" || item.level == null ? undefined : Number(item.level),
       })),
     };
+  }
+  if (type === "blog") {
+    return { ...content, postCount: Number(content.postCount) || 3 };
   }
   return content;
 }

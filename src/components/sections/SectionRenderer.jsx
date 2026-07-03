@@ -3,6 +3,13 @@ import { About } from "./About";
 import { Skills } from "./Skills";
 import { Projects } from "./Projects";
 import { Contact } from "./Contact";
+import { Blog } from "./Blog";
+import { Research } from "./Research";
+import { Gallery } from "./Gallery";
+import { Testimonials } from "./Testimonials";
+import { Experience } from "./Experience";
+import { Certifications } from "./Certifications";
+import { VentureList } from "./VentureList";
 import { sectionThemeOverrideToCss } from "@/lib/theme/tokensToCss";
 
 /**
@@ -17,6 +24,14 @@ const SECTION_COMPONENTS = {
   skills: Skills,
   projects: Projects,
   contact: Contact,
+  blog: Blog,
+  research: Research,
+  gallery: Gallery,
+  testimonials: Testimonials,
+  experience: Experience,
+  certifications: Certifications,
+  startup: VentureList,
+  business: VentureList,
 };
 
 function deviceVisibilityClassName(deviceVisibility) {
