@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "@/lib/auth/session";
 import { SignOutButton } from "@/components/admin/SignOutButton";
+import { NotificationsBell } from "@/components/admin/NotificationsBell";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Sections" },
@@ -8,6 +9,8 @@ const NAV_ITEMS = [
   { href: "/dashboard/products", label: "Products" },
   { href: "/dashboard/orders", label: "Orders" },
   { href: "/dashboard/coupons", label: "Coupons" },
+  { href: "/dashboard/campaigns", label: "Campaigns" },
+  { href: "/dashboard/analytics", label: "Analytics" },
   { href: "/dashboard/theme", label: "Theme" },
   { href: "/dashboard/media", label: "Media" },
 ];
@@ -54,7 +57,12 @@ export default async function DashboardLayout({ children }) {
           <SignOutButton />
         </div>
       </aside>
-      <main className="flex-1 p-8">{children}</main>
+      <main className="flex-1">
+        <header className="flex justify-end p-4 border-b border-base-300">
+          <NotificationsBell />
+        </header>
+        <div className="p-8">{children}</div>
+      </main>
     </div>
   );
 }

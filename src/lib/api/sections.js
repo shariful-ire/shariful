@@ -27,6 +27,12 @@ export function deleteSection(id) {
   return fetchApi(`/sections/${id}`, { method: "DELETE" });
 }
 
+export function duplicateSection(id) {
+  return fetchApi(`/sections/${id}/duplicate`, { method: "POST" }).then(
+    (r) => r.data
+  );
+}
+
 export function reorderSections(updates) {
   return fetchApi("/sections/reorder", {
     method: "POST",

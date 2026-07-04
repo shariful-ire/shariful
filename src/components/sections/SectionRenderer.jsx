@@ -10,6 +10,7 @@ import { Testimonials } from "./Testimonials";
 import { Experience } from "./Experience";
 import { Certifications } from "./Certifications";
 import { VentureList } from "./VentureList";
+import { DynamicFields } from "./DynamicFields";
 import { sectionThemeOverrideToCss } from "@/lib/theme/tokensToCss";
 
 /**
@@ -32,6 +33,7 @@ const SECTION_COMPONENTS = {
   certifications: Certifications,
   startup: VentureList,
   business: VentureList,
+  custom: DynamicFields,
 };
 
 function deviceVisibilityClassName(deviceVisibility) {
@@ -81,7 +83,7 @@ export function SectionRenderer({ sections }) {
             {overrideCss ? (
               <style dangerouslySetInnerHTML={{ __html: overrideCss }} />
             ) : null}
-            <Component content={section.content} />
+            <Component content={section.content} fieldSchema={section.fieldSchema} />
           </div>
         );
       })}

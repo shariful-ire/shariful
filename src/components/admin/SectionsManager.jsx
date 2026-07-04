@@ -6,6 +6,7 @@ import {
   getSections,
   updateSection,
   deleteSection,
+  duplicateSection,
   reorderSections,
 } from "@/lib/api/sections";
 
@@ -31,6 +32,11 @@ export function SectionsManager({ initialSections }) {
 
   const deleteMutation = useMutation({
     mutationFn: (id) => deleteSection(id),
+    onSuccess: invalidate,
+  });
+
+  const duplicateMutation = useMutation({
+    mutationFn: (id) => duplicateSection(id),
     onSuccess: invalidate,
   });
 
@@ -124,6 +130,14 @@ export function SectionsManager({ initialSections }) {
               >
                 Edit
               </a>
+              <button
+                type="button"
+                className="btn btn-sm btn-ghost"
+                onClick={() => duplicateMutation.mutate(section._id)}
+                disabled={duplicateMutation.isPending}
+              >
+                Duplicate
+              </button>
               <button
                 type="button"
                 className="btn btn-sm btn-error btn-outline"

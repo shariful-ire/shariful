@@ -169,7 +169,20 @@ export const sectionTypeSchema = z.enum([
   "certifications",
   "startup",
   "business",
+  "custom",
 ]);
+
+export const fieldDefSchema = z.object({
+  key: z
+    .string()
+    .min(1)
+    .max(60)
+    .regex(/^[a-zA-Z][a-zA-Z0-9_]*$/, "key must be a valid identifier"),
+  label: z.string().min(1).max(120),
+  type: z.enum(["text", "textarea", "number", "boolean", "url", "image", "richtext", "list"]),
+  required: z.boolean().default(false),
+  placeholder: z.string().max(200).optional(),
+});
 
 export const sectionBaseSchema = z.object({
   type: sectionTypeSchema,
@@ -182,4 +195,5 @@ export const sectionBaseSchema = z.object({
   isVisible: z.boolean().default(true),
   isEnabled: z.boolean().default(true),
   isPublished: z.boolean().default(false),
+  fieldSchema: z.array(fieldDefSchema).optional(),
 });

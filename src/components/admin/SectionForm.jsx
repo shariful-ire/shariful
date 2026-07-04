@@ -18,6 +18,7 @@ import { ExperienceFields } from "./sections/ExperienceFields";
 import { CertificationsFields } from "./sections/CertificationsFields";
 import { VentureFields } from "./sections/VentureFields";
 import { BlogFields } from "./sections/BlogFields";
+import { CustomSectionFields } from "./sections/CustomSectionFields";
 
 const CONTENT_FIELDS = {
   hero: HeroFields,
@@ -33,6 +34,7 @@ const CONTENT_FIELDS = {
   startup: VentureFields,
   business: VentureFields,
   blog: BlogFields,
+  custom: CustomSectionFields,
 };
 
 const DEFAULT_CONTENT = {
@@ -49,6 +51,7 @@ const DEFAULT_CONTENT = {
   startup: { heading: "Startups", items: [] },
   business: { heading: "Business", items: [] },
   blog: { heading: "Blog", postCount: 3 },
+  custom: {},
 };
 
 /** Splits "react, node, mongodb" into ["react","node","mongodb"], dropping empties. */
@@ -104,6 +107,7 @@ export function SectionForm({ mode, section }) {
     control,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     // .passthrough() so `content` (validated separately, per-type) survives
@@ -118,6 +122,7 @@ export function SectionForm({ mode, section }) {
           isEnabled: section.isEnabled,
           isPublished: section.isPublished,
           content: section.content,
+          fieldSchema: section.fieldSchema || [],
           themeOverride: section.themeOverride || DEFAULT_OVERRIDE,
         }
       : {
@@ -128,6 +133,7 @@ export function SectionForm({ mode, section }) {
           isEnabled: true,
           isPublished: false,
           content: DEFAULT_CONTENT.hero,
+          fieldSchema: [],
           themeOverride: DEFAULT_OVERRIDE,
         },
   });
@@ -199,7 +205,7 @@ export function SectionForm({ mode, section }) {
       </div>
 
       <div className="divider">Content</div>
-      <ContentFields register={register} control={control} />
+      <ContentFields register={register} control={control} watch={watch} setValue={setValue} />
 
       <div className="divider">Theme override</div>
       <label className="label cursor-pointer gap-2 self-start">
